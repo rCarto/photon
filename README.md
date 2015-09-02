@@ -7,15 +7,13 @@ Photon web site: http://photon.komoot.de/
 Photon source code: https://github.com/komoot/photon
 
 ## Install Instructions
-
-<code><pre>require(devtools)  
+<pre><code>require(devtools)  
 devtools::install_github(repo = 'rCarto/photon')  
-</pre></code>
+</code></pre>
 
 ## Usage
-
-<code><pre>loc <- c("19 rue Michel Bakounine, 29600 Morlaix, France",
+<pre><code>loc <- c("19 rue Michel Bakounine, 29600 Morlaix, France",
          "5 rue Proudhon, 34000 Montpellier, France",
          "2 Emma Goldmanweg, Tilburg, Netherlands",
          "36 Strada Panait Israti, Bucarest, Romania")
-geocode(loc, limit = 1, key = "place")</pre></code>
+geocode(loc, limit = 1, key = "place")</code></pre>
