@@ -10,8 +10,8 @@ Description: This is an R interface to the photon API. Photon uses OpenSteetMap 
 License: GPL-3
 Imports: RCurl,
     RJSONIO
-URL: https://github.com/rCarto/flows
-BugReports: https://github.com/rCarto/flows/issues
+URL: https://github.com/rCarto/photon
+BugReports: https://github.com/rCarto/photon/issues
 LazyData: TRUE
 Encoding: UTF-8
 
