@@ -42,7 +42,7 @@ NULL
 #' loc <- c("19 rue Michel Bakounine, 29600 Morlaix, France",
 #'          "5 rue Proudhon, 34000 Montpellier, France",
 #'          "2 Emma Goldmanweg, Tilburg, Netherlands",
-#'          "36 Strada Panait Israti, Bucarest, Romania")
+#'          "36 Strada Panait Istrati, Bucarest, Romania")
 #' geocode(loc, limit = 1, key = "place")
 #' @export
 geocode <- function(location, limit = NULL, key = NULL, value = NULL,
