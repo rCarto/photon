@@ -6,13 +6,14 @@ Date: 2015-08-19
 Authors@R: c(
       person("Timothée", "Giraud", email = "timothee.giraud@ums-riate.fr", role = c("cre","aut")),
       person("Matthieu", "Viry", email = "matthieu.viry@gmail.com", role = c("ctb")))
-Description: This is an R interface to the photon API. Photon uses OpenSteetMap to geocode locations.
+Description: This is an R interface to the photon API. Photon uses OpenSteetMap
+    to geocode locations.
 License: GPL-3
-Imports: RCurl,
+Imports:
+    RCurl,
     RJSONIO
 URL: https://github.com/rCarto/photon
 BugReports: https://github.com/rCarto/photon/issues
 LazyData: TRUE
 Encoding: UTF-8
-
-
+RoxygenNote: 5.0.1
