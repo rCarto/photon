@@ -21,6 +21,7 @@ NULL
 #' language.
 #' @param server Select which API is used. The default API is the photon public
 #' API (see Details), but you can use your own photon API.
+#' @param quiet Should the function print the currently processed input ?
 #' @details Terms of use of the photon public API: \cr
 #' "You can use the API for your
 #' project, but please be fair - extensive usage will be throttled. We do not
@@ -47,7 +48,7 @@ NULL
 #' @export
 geocode <- function(location, limit = NULL, key = NULL, value = NULL,
                     lang = NULL,
-                    server = NULL){
+                    server = NULL, quiet = FALSE){
   # options management
   if (!is.null(limit)){limit <- paste("&limit=",limit, sep="") }
   if (!is.null(key)){key <- paste("&osm_tag=",key, sep="")}
@@ -79,7 +80,9 @@ geocode <- function(location, limit = NULL, key = NULL, value = NULL,
   llocation <- length(location)
   for (i in 1:llocation){
     # buid query
-    print(location[i])
+    if (!quiet){
+      print(location[i])
+    }
     searched <- paste(server,"api?q=",location[i], params, sep="")
     x <- tryCatch(
       {
