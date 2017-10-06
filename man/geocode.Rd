@@ -5,7 +5,7 @@
 \title{Geocode Locations With Photon API}
 \usage{
 geocode(location, limit = NULL, key = NULL, value = NULL, lang = NULL,
-  server = NULL, quiet = FALSE)
+  locbias = NULL, server = NULL, quiet = TRUE)
 }
 \arguments{
 \item{location}{Location(s) to geocode, a character vector.}
@@ -21,6 +21,9 @@ documentation).}
 \item{lang}{Photon is multilingual, this parameter allows to specify a
 language.}
 
+\item{locbias}{Location bias. A pair of coordinates (WGS84, \code{c(Lon, Lat)})
+to center the search.}
+
 \item{server}{Select which API is used. The default API is the photon public
 API (see Details), but you can use your own photon API.}
 
@@ -28,8 +31,8 @@ API (see Details), but you can use your own photon API.}
 }
 \value{
 A data.frame with the following fields is returned :\cr
-location, name, housenumber, street, postcode, city, state, country, osm_key,
-osm_value,  lon,  lat, msg.\cr
+location, osm_id, osm_type, name, housenumber, street, postcode, city, state,
+country, osm_key, osm_value,  lon, lat, msg.\cr
 \code{location} is the original searched location.\cr
 \code{lon} and \code{lat} are longitude and latitude (WGS84).\cr
 \code{msg} is filled with the "Not found" text string if no results are found for a
@@ -46,11 +49,20 @@ guarantee for the availability and usage might be subject of change in the
 future. Have fun with photon and make OSM grow!"
 }
 \examples{
-loc <- c("19 rue Michel Bakounine, 29600 Morlaix, France",
-         "5 rue Proudhon, 34000 Montpellier, France",
-         "2 Emma Goldmanweg, Tilburg, Netherlands",
-         "36 Strada Panait Israti, Bucarest, Romania")
-geocode(loc, limit = 1, key = "place")
+\dontrun{
+address <- c("19 rue Michel Bakounine, 29600 Morlaix, France",
+             "5 rue Proudhon, 34130 Mauguio France",
+             "2 Emma Goldmanweg, Tilburg, Netherlands",
+             "36 Strada Panait Israti, Bucarest, Romania")
+place <- geocode(address, limit = 1, key = "place")
+place
+
+geocode("Montreuil", limit = 1)
+geocode("Montreuil", locbias = c(2.4, 48.9), limit = 1)
+
+# with a typical local install of photon
+place <- geocode(address, limit = 1, key = "place", server = "http://0.0.0.0:2322/")
+}
 }
 \references{
 Photon web site \url{http://photon.komoot.de/}\cr

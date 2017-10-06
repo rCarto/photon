@@ -1,8 +1,8 @@
 Package: photon
 Type: Package
 Title: Geocode Locations with Photon API
-Version: 1.0
-Date: 2015-09-28
+Version: 1.1
+Date: 2017-10-06
 Authors@R: c(
       person("Timothée", "Giraud", email = "timothee.giraud@ums-riate.fr", role = c("cre","aut")),
       person("Matthieu", "Viry", email = "matthieu.viry@gmail.com", role = c("ctb")))
