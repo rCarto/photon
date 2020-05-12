@@ -115,7 +115,7 @@ geocode <- function(location, limit = NULL, key = NULL, value = NULL,
       {
         curl = getCurlHandle()
         # send query
-        RCurl::getURL(searched, curl = curl)
+        RCurl::getURL(searched, curl = curl, .encoding = "UTF-8")
       },
       error = function(condition){
         cat(getCurlInfo(curl, "response.code")[[1]])
