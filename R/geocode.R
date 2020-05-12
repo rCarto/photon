@@ -123,7 +123,7 @@ geocode <- function(location, limit = NULL, key = NULL, value = NULL,
     )
 
     # parse result
-    ret <- RJSONIO::fromJSON(x)
+    ret <- RJSONIO::fromJSON(x, encoding="UTF-8")
     nbfeat <- length(ret$features)
     # if result...
     if(nbfeat > 0){
