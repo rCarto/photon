@@ -1,11 +1,12 @@
 Package: photon
 Type: Package
 Title: Geocode Locations with Photon API
-Version: 1.1
+Version: 1.2
 Date: 2017-10-06
 Authors@R: c(
       person("Timothée", "Giraud", email = "timothee.giraud@ums-riate.fr", role = c("cre","aut")),
-      person("Matthieu", "Viry", email = "matthieu.viry@gmail.com", role = c("ctb")))
+      person("Matthieu", "Viry", email = "matthieu.viry@gmail.com", role = c("ctb")),
+      person("Dix", "Jan", email = "jan.dix@uni-konstanz.de", role = c("ctb")))
 Description: This is an R interface to the photon API. Photon uses OpenSteetMap to geocode locations.
 License: GPL-3
 Imports: RCurl,

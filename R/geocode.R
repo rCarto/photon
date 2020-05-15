@@ -115,7 +115,7 @@ geocode <- function(location, limit = NULL, key = NULL, value = NULL,
       {
         curl = getCurlHandle()
         # send query
-        RCurl::getURL(searched, curl = curl)
+        RCurl::getURL(searched, curl = curl, .encoding = "UTF-8")
       },
       error = function(condition){
         cat(getCurlInfo(curl, "response.code")[[1]])
@@ -123,7 +123,7 @@ geocode <- function(location, limit = NULL, key = NULL, value = NULL,
     )
 
     # parse result
-    ret <- RJSONIO::fromJSON(x)
+    ret <- RJSONIO::fromJSON(x, encoding = "UTF-8")
     nbfeat <- length(ret$features)
     # if result...
     if(nbfeat > 0){
@@ -227,7 +227,7 @@ reverse <- function(x, y, server = NULL){
       {
         curl = RCurl::getCurlHandle()
         # send query
-        RCurl::getURL(searched, curl = curl)
+        RCurl::getURL(searched, curl = curl, .encoding = "UTF-8")
       },
       error = function(condition){
         cat(getCurlInfo(curl, "response.code")[[1]])
@@ -235,7 +235,7 @@ reverse <- function(x, y, server = NULL){
     )
 
     # parse result
-    ret <- RJSONIO::fromJSON(resRaw)
+    ret <- RJSONIO::fromJSON(resRaw, encoding = "UTF-8")
     nbfeat <- length(ret$features)
     # if result...
     if(nbfeat > 0){
