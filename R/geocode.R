@@ -57,88 +57,72 @@ NULL
 #' place <- geocode(address, limit = 1, key = "place", server = "http://0.0.0.0:2322/")
 #' }
 #' @export
-geocode <- function(location, limit = NULL, key = NULL, value = NULL,
-                    lang = NULL, locbias = NULL,
-                    server = NULL, quiet = TRUE){
-  # options management
-  if (!is.null(limit)){limit <- paste0("&limit=",limit) }
-  if (!is.null(key)){key <- paste0("&osm_tag=",key)}
-  if (!is.null(locbias)){locbias <- paste0("&lon=",locbias[1],"&lat=", locbias[2])}
-  if (!is.null(value)){
+geocode <- function (location, limit = NULL, key = NULL, value = NULL, 
+          lang = NULL, locbias = NULL, server = NULL, quiet = TRUE) 
+{
+  if (!is.null(limit)) {
+    limit <- paste0("&limit=", limit)
+  }
+  if (!is.null(key)) {
+    key <- paste0("&osm_tag=", key)
+  }
+  if (!is.null(locbias)) {
+    locbias <- paste0("&lon=", locbias[1], "&lat=", locbias[2])
+  }
+  if (!is.null(value)) {
     if (!is.null(key)) {
-      value <- paste0(":",value)
-    }else{
-      value <- paste0("&osm_tag=:",value)
+      value <- paste0(":", value)
+    }
+    else {
+      value <- paste0("&osm_tag=:", value)
     }
   }
-  if (!is.null(lang)){lang <- paste0("&lang=",lang)}
-
+  if (!is.null(lang)) {
+    lang <- paste0("&lang=", lang)
+  }
   params <- paste0(limit, key, value, lang, locbias)
-  if (is.null(server)){
-    server <- "http://photon.komoot.de/"
+  if (is.null(server)) {
+    server <- "https://photon.komoot.io/"
     sleepy <- 1
-  }else{
+  }
+  else {
     sleepy <- 0
   }
-
-  # result data.frame
-  pts <- data.frame(location = character(0),
-                    osm_id = numeric(0),
-                    osm_type = character(0),
-                    name = character(0),
-                    housenumber = character(0),
-                    street = character(0),
-                    postcode = character(0),
-                    city = character(0),
-                    state = character(0),
-                    country = character(0),
-                    osm_key = character(0),
-                    osm_value = character(0),
-                    lon = numeric(0),
-                    lat = numeric(0),
-                    msg = character(0),
-                    stringsAsFactors = FALSE)
-
-
-  # query builder
-  llocation <- length(location)
-  for (i in 1:llocation){
-    # buid query
-
-    searched <- paste0(server,"api?q=",location[i], params)
+  pts <- data.frame(location = character(0), osm_id = numeric(0), 
+                    osm_type = character(0), name = character(0), housenumber = character(0), 
+                    street = character(0), postcode = character(0), city = character(0), 
+                    state = character(0), country = character(0), osm_key = character(0), 
+                    osm_value = character(0), lon = numeric(0), lat = numeric(0), 
+                    msg = character(0), stringsAsFactors = FALSE)
+  llocation <- length(locations)
+  for (i in 1:llocation) {
+    searched <- paste0(server, "api?q=", str_replace_all(location[i],"&","and"), params)
     searched <- utils::URLencode(searched)
-    if (!quiet){
-      cat(" ",location[i], '\n', searched,'\n')
+    if (!quiet) {
+      cat(" ", location[i], "\n", searched, "\n")
     }
-
-    x <- tryCatch(
-      {
-        curl = getCurlHandle()
-        # send query
-        RCurl::getURL(searched, curl = curl, .encoding = "UTF-8")
-      },
-      error = function(condition){
-        cat(getCurlInfo(curl, "response.code")[[1]])
-      }
-    )
-
-    # parse result
+    x <- tryCatch({
+      httr::GET(searched, .encoding = "UTF-8") %>% content(.,as = "text")
+    }, error = function(condition) {
+      cat(getCurlInfo(curl, "response.code")[[1]])
+    })
     ret <- RJSONIO::fromJSON(x, encoding = "UTF-8")
     nbfeat <- length(ret$features)
-    # if result...
-    if(nbfeat > 0){
-      for (j in 1:nbfeat){
-        ret_names <- intersect(names(pts),
-                               names(ret$features[[j]]$properties))
-        tmp_df <- data.frame(t(sapply(ret_names, function(x) {ret$features[[j]]$properties[[x]]})),
-                             stringsAsFactors=FALSE)
+    if (nbfeat > 0) {
+      for (j in 1:nbfeat) {
+        ret_names <- intersect(names(pts), names(ret$features[[j]]$properties))
+        tmp_df <- data.frame(t(sapply(ret_names, function(x) {
+          ret$features[[j]]$properties[[x]]
+        })), stringsAsFactors = FALSE)
         tmp_df$lon <- ret$features[[j]]$geometry$coordinates[1]
         tmp_df$lat <- ret$features[[j]]$geometry$coordinates[2]
-        pts[nrow(pts)+1,c("location",names(tmp_df))] <- c(location[i],
-                                                          tmp_df[1,])
+        pts[nrow(pts) + 1, c("location", names(tmp_df))] <- c(location[i], 
+                                                              tmp_df[1, ])
       }
-    } else {
-      pts[nrow(pts)+1,c("location", "msg")] <- c(location[i],"Not found")
+    }
+    else {
+      pts[nrow(pts) + 1, c("location", "msg")] <- c(location[i], 
+                                                    "Not found")
     }
     Sys.sleep(sleepy)
   }
