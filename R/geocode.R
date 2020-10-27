@@ -39,7 +39,7 @@ NULL
 #' @import RCurl
 #' @import RJSONIO
 #' @references
-#' Photon web site \url{http://photon.komoot.de/}\cr
+#' Photon web site \url{https://photon.komoot.io/}\cr
 #' Photon source code \url{https://github.com/komoot/photon}
 #' @examples
 #' \dontrun{
@@ -75,7 +75,7 @@ geocode <- function(location, limit = NULL, key = NULL, value = NULL,
 
   params <- paste0(limit, key, value, lang, locbias)
   if (is.null(server)){
-    server <- "http://photon.komoot.de/"
+    server <- "https://photon.komoot.io/"
     sleepy <- 1
   }else{
     sleepy <- 0
@@ -169,7 +169,7 @@ geocode <- function(location, limit = NULL, key = NULL, value = NULL,
 #' @import RCurl
 #' @import RJSONIO
 #' @references
-#' Photon web site \url{http://photon.komoot.de/}\cr
+#' Photon web site \url{https://photon.komoot.io/}\cr
 #' Photon source code \url{https://github.com/komoot/photon}
 #' @examples
 #' \dontrun{
@@ -188,7 +188,7 @@ reverse <- function(x, y, server = NULL){
   # options management
   nloc <- length(x)
   if (is.null(server)){
-    server <- "http://photon.komoot.de/"
+    server <- "https://photon.komoot.io/"
     sleepy <- 1
   }else{
     sleepy <- 0

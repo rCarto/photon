@@ -3,7 +3,6 @@
 \docType{package}
 \name{photon}
 \alias{photon}
-\alias{photon-package}
 \title{Geocode Locations With Photon API}
 \description{
 Photon is an open source geocoder built for OpenStreetMap data

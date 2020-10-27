@@ -4,8 +4,16 @@
 \alias{geocode}
 \title{Geocode Locations With Photon API}
 \usage{
-geocode(location, limit = NULL, key = NULL, value = NULL, lang = NULL,
-  locbias = NULL, server = NULL, quiet = TRUE)
+geocode(
+  location,
+  limit = NULL,
+  key = NULL,
+  value = NULL,
+  lang = NULL,
+  locbias = NULL,
+  server = NULL,
+  quiet = TRUE
+)
 }
 \arguments{
 \item{location}{Location(s) to geocode, a character vector.}

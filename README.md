@@ -3,7 +3,7 @@
 Photon is an open source geocoder built for OpenStreetMap data and based on elasticsearch. 
 This package allows to query a photon API and get the results in a data frame.
 
-Photon web site: http://photon.komoot.de/     
+Photon web site: https://photon.komoot.io/    
 Photon source code: https://github.com/komoot/photon
 
 ## Install Instructions
