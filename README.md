@@ -1,5 +1,5 @@
 [![Project Status: Abandoned – Initial development has started, but there has not yet been a stable, usable release; the project has been abandoned and the author(s) do not intend on continuing development.](https://www.repostatus.org/badges/latest/abandoned.svg)](https://www.repostatus.org/#abandoned)
-
+*The project has been abandoned and the author do not intend on continuing development.*
 
 
 # R Interface to the Photon API 
